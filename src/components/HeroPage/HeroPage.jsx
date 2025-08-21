@@ -3,7 +3,7 @@ import styles from "./HeroPage.module.css";
 import Orb from "./Orb";
 
 // Firebase imports
-import { signInWithPopup, signInWithRedirect, getRedirectResult } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase";
 
 const Icon = {
@@ -53,18 +53,76 @@ const Icon = {
 };
 
 const aiAgents = [
-  { id: 1, name: "Creative Writer", description: "Crafts compelling stories, articles, and creative content with human-like creativity.", icon: Icon.Sparkles, gradient: ["#a855f7", "#ec4899", "#ef4444"] },
-  { id: 2, name: "Code Assistant", description: "Expert programming companion for debugging, optimization, and code generation.", icon: Icon.Bot, gradient: ["#3b82f6", "#06b6d4", "#14b8a6"] },
-  { id: 3, name: "Image Generator", description: "Creates stunning visuals and artwork from text descriptions using advanced AI.", icon: Icon.Image, gradient: ["#10b981", "#14b8a6", "#06b6d4"] },
-  { id: 4, name: "Data Analyst", description: "Processes and analyzes complex data to provide actionable insights.", icon: Icon.Brain, gradient: ["#6366f1", "#a855f7", "#ec4899"] },
-  { id: 5, name: "Chat Companion", description: "Engaging conversational AI for natural, helpful, and friendly interactions.", icon: Icon.Message, gradient: ["#14b8a6", "#06b6d4", "#3b82f6"] },
-  { id: 6, name: "Task Optimizer", description: "Streamlines workflows and automates repetitive tasks for maximum efficiency.", icon: Icon.Zap, gradient: ["#f59e0b", "#ef4444", "#ec4899"] },
+  {
+    id: 1,
+    name: "Creative Writer",
+    description: "Crafts compelling stories, articles, and creative content with human-like creativity.",
+    icon: Icon.Sparkles,
+    gradient: ["#a855f7", "#ec4899", "#ef4444"],
+  },
+  {
+    id: 2,
+    name: "Code Assistant",
+    description:
+      "Expert programming companion for debugging, optimization, and code generation.",
+    icon: Icon.Bot,
+    gradient: ["#3b82f6", "#06b6d4", "#14b8a6"],
+  },
+  {
+    id: 3,
+    name: "Image Generator",
+    description:
+      "Creates stunning visuals and artwork from text descriptions using advanced AI.",
+    icon: Icon.Image,
+    gradient: ["#10b981", "#14b8a6", "#06b6d4"],
+  },
+  {
+    id: 4,
+    name: "Data Analyst",
+    description: "Processes and analyzes complex data to provide actionable insights.",
+    icon: Icon.Brain,
+    gradient: ["#6366f1", "#a855f7", "#ec4899"],
+  },
+  {
+    id: 5,
+    name: "Chat Companion",
+    description:
+      "Engaging conversational AI for natural, helpful, and friendly interactions.",
+    icon: Icon.Message,
+    gradient: ["#14b8a6", "#06b6d4", "#3b82f6"],
+  },
+  {
+    id: 6,
+    name: "Task Optimizer",
+    description:
+      "Streamlines workflows and automates repetitive tasks for maximum efficiency.",
+    icon: Icon.Zap,
+    gradient: ["#f59e0b", "#ef4444", "#ec4899"],
+  },
 ];
 
 const features = [
-  { icon: Icon.Image, title: "Image Generation", description: "Create stunning visuals with our advanced AI image generation technology.", gradient: ["#10b981", "#06b6d4"] },
-  { icon: Icon.Bot, title: "6 AI Models", description: "Specialized models for writing, coding, analysis, and more.", gradient: ["#3b82f6", "#7c3aed"] },
-  { icon: Icon.Zap, title: "Lightning Fast", description: "Get instant responses and results with our optimized AI infrastructure.", gradient: ["#7c3aed", "#ec4899"] },
+  {
+    icon: Icon.Image,
+    title: "Image Generation",
+    description:
+      "Create stunning visuals with our advanced AI image generation technology.",
+    gradient: ["#10b981", "#06b6d4"],
+  },
+  {
+    icon: Icon.Bot,
+    title: "6 AI Models",
+    description:
+      "Specialized models for writing, coding, analysis, and more.",
+    gradient: ["#3b82f6", "#7c3aed"],
+  },
+  {
+    icon: Icon.Zap,
+    title: "Lightning Fast",
+    description:
+      "Get instant responses and results with our optimized AI infrastructure.",
+    gradient: ["#7c3aed", "#ec4899"],
+  },
 ];
 
 export default function HeroPage() {
@@ -75,25 +133,10 @@ export default function HeroPage() {
     return () => clearInterval(t);
   }, []);
 
-  // Handle login result after redirect (mobile)
-  useEffect(() => {
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result?.user) {
-          console.log("Logged in:", result.user);
-        }
-      })
-      .catch((err) => console.error("Redirect login failed:", err));
-  }, []);
-
-  // Google Sign-in handler
+  // Simplified Google Sign-in handler without redirect
   const handleGetStarted = async () => {
     try {
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        await signInWithRedirect(auth, googleProvider); // Mobile
-      } else {
-        await signInWithPopup(auth, googleProvider); // Desktop
-      }
+      await signInWithPopup(auth, googleProvider);
     } catch (err) {
       console.error("Login failed:", err);
     }
@@ -200,7 +243,9 @@ export default function HeroPage() {
               {aiAgents.map((_, i) => (
                 <button
                   key={i}
-                  className={`${styles.carouselDot} ${i === currentSlide ? styles.carouselDotActive : styles.carouselDotInactive}`}
+                  className={`${styles.carouselDot} ${
+                    i === currentSlide ? styles.carouselDotActive : styles.carouselDotInactive
+                  }`}
                   onClick={() => setCurrentSlide(i)}
                   aria-label={`Go to slide ${i + 1}`}
                 />

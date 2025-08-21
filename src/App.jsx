@@ -15,7 +15,7 @@ function App() {
   const [assistant, setAssistant] = useState();
   const [chats, setChats] = useState([]);
   const [activeChatId, setActiveChatId] = useState();
-  const [user, setUser] = useState(null); // Track Firebase user
+  const [user, setUser] = useState(null); // Firebase user
 
   const activeChatMessages = useMemo(
     () => chats.find(({ id }) => id === activeChatId)?.messages ?? [],
@@ -26,56 +26,68 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
-
-      // ✅ Only create a new chat if logged in AND no chats exist
       if (firebaseUser && chats.length === 0) {
         handleNewChatCreate();
       }
     });
-
     return () => unsubscribe();
   }, [chats.length]);
 
+  // Removed getRedirectResult useEffect as it causes conflicts on mobile
+
+  // Assistant selection
   function handleAssistantChange(newAssistant) {
     setAssistant(newAssistant);
   }
 
+  // Update messages in a chat
   function handleChatMessagesUpdate(id, messages) {
-    const title = messages[0]?.content.split(" ").slice(0, 5).join(" ");
+    const title =
+      messages[0]?.content.split(" ").slice(0, 5).join(" ") || "New Chat";
     setChats((prevChats) =>
       prevChats.map((chat) =>
-        chat.id === id
-          ? { ...chat, title: chat.title ?? title, messages }
-          : chat
+        chat.id === id ? { ...chat, title: chat.title ?? title, messages } : chat
       )
     );
   }
 
+  // Create a new chat
   function handleNewChatCreate() {
     const id = uuidv4();
     setActiveChatId(id);
     setChats((prevChats) => [...prevChats, { id, messages: [] }]);
   }
 
+  // Change active chat
   function handleActiveChatIdChange(id) {
     setActiveChatId(id);
-    // Keep only chats that have messages
-    setChats((prevChats) => prevChats.filter(({ messages }) => messages.length > 0));
   }
 
-  // 🔑 If user not logged in → show HeroPage
+  // Handle logout with proper cleanup
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setChats([]);
+      setActiveChatId(null);
+      setAssistant(null);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
+  // If user not logged in → show HeroPage
   if (!user) {
     return <HeroPage />;
   }
 
-  // 🔑 If logged in → show chat app
+  // If logged in → show chat app
   return (
     <div className={styles.App}>
       <header className={styles.Header}>
         <img className={styles.Logo} src="/chat-bot.png" alt="logo" />
         <h2 className={styles.Title}>ZENIX HUB</h2>
 
-        {/* ✅ User Info top-right */}
+        {/* User Info */}
         <div className={styles.UserInfo}>
           <div className={styles.UserProfile}>
             <svg
@@ -92,9 +104,9 @@ function App() {
                 className={styles.UserIconStroke}
               />
             </svg>
-            <span className={styles.UserName}>{user.displayName}</span>
+            <span className={styles.UserName}>{user.displayName || "User"}</span>
           </div>
-          <button className={styles.LogoutButton} onClick={() => signOut(auth)}>
+          <button className={styles.LogoutButton} onClick={handleLogout}>
             Logout
           </button>
         </div>
@@ -107,6 +119,8 @@ function App() {
           onActiveChatIdChange={handleActiveChatIdChange}
           onNewChatCreate={handleNewChatCreate}
           activeChatMessages={activeChatMessages}
+          user={user}
+          onLogout={handleLogout}
         />
 
         <main className={styles.Main}>
