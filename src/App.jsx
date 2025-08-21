@@ -5,7 +5,7 @@ import { Assistants } from "./components/Assistants/Assistants.jsx";
 import { Theme } from "./components/Theme/Theme.jsx";
 import { Chat } from "./components/Chat/Chat.jsx";
 import { v4 as uuidv4 } from "uuid";
-import HeroPage from "./components/HeroPage/HeroPage.jsx"; 
+import HeroPage from "./components/HeroPage/HeroPage.jsx";
 
 // Firebase imports
 import { auth } from "./firebase";
