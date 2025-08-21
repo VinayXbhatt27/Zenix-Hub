@@ -1,14 +1,10 @@
-// src/firebase.jsx
+// src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-const isLocal = window.location.hostname === "localhost";
-
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: isLocal
-    ? import.meta.env.VITE_FIREBASE_AUTH_DOMAIN // e.g., your-app-id.firebaseapp.com
-    : "zenixhub.dev", // production domain
+  authDomain: "zenixhub.dev", 
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
