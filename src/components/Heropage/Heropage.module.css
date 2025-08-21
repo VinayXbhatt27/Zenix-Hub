@@ -1,0 +1,349 @@
+.heroContainer {
+  min-height: 100vh;
+  background: #000000;
+  color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.heroContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.heroBackground {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.contentWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Carousel Styles */
+.carouselSection {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.carouselTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #a855f7, #06b6d4);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.carouselContainer {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.carouselWrapper {
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.carouselTrack {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carouselSlide {
+  min-width: 100%;
+  padding: 0 1rem;
+}
+
+.agentCard {
+  background: rgba(45, 50, 70, 0.8);
+  border: 1px solid rgba(60, 70, 90, 0.3);
+  border-radius: 1rem;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.agentCard:hover {
+  border-color: rgba(80, 90, 110, 0.4);
+  background: rgba(55, 60, 80, 0.9);
+  transform: translateY(-2px);
+}
+
+.agentCardContent {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.agentIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.agentName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.agentDescription {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.carouselButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.carouselButtonLeft {
+  left: -60px;
+}
+
+.carouselButtonRight {
+  right: -60px;
+}
+
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.carouselDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carouselDotActive {
+  background: #06b6d4;
+}
+
+.carouselDotInactive {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.carouselDotInactive:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Features Section */
+.featuresSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 4rem 0;
+}
+
+.featureCard {
+  /* Updated feature cards with matte finish using black and imperial blue mix */
+  background: rgba(45, 50, 70, 0.8);
+  border: 1px solid rgba(60, 70, 90, 0.3);
+  border-radius: 1rem;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  /* Enhanced hover with subtle blue glow matching the reference */
+  box-shadow: 0 0 20px rgba(70, 80, 100, 0.3), 0 0 40px rgba(45, 50, 70, 0.2);
+  border-color: rgba(80, 90, 110, 0.4);
+  background: rgba(55, 60, 80, 0.9);
+}
+
+.featureCardContent {
+  text-align: center;
+}
+
+.featureIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.featureTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.featureDescription {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .heroContainer {
+    padding: 1rem 0;
+  }
+
+  .contentWrapper {
+    padding: 0 0.5rem;
+  }
+
+  .carouselTitle {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .carouselSection {
+    padding: 2rem 0;
+  }
+
+  .carouselButtonLeft {
+    left: 10px;
+    width: 35px;
+    height: 35px;
+    z-index: 20;
+  }
+
+  .carouselButtonRight {
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    z-index: 20;
+  }
+
+  .agentCard {
+    padding: 1.5rem;
+  }
+
+  .agentCardContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .agentIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .agentName {
+    font-size: 1.25rem;
+  }
+
+  .agentDescription {
+    font-size: 0.9rem;
+  }
+
+  .featuresSection {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+
+  .featureCard {
+    padding: 1.5rem;
+  }
+
+  .featureIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .featureTitle {
+    font-size: 1.1rem;
+  }
+
+  .featureDescription {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .carouselButtonLeft {
+    left: -20px;
+  }
+
+  .carouselButtonRight {
+    right: -20px;
+  }
+
+  .featuresSection {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+/* Small Mobile Responsiveness */
+@media (max-width: 480px) {
+  .carouselButtonLeft {
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .carouselButtonRight {
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .carouselContainer {
+    max-width: 100%;
+  }
+
+  .carouselSlide {
+    padding: 0 0.5rem;
+  }
+
+  .agentCard {
+    padding: 1rem;
+  }
+
+  .featureCard {
+    padding: 1rem;
+  }
+
+  .carouselTitle {
+    font-size: 1.75rem;
+  }
+}

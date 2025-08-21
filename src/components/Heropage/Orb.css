@@ -1,0 +1,189 @@
+.orb-container {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Removed separate orb background element and color animation */
+/* Simplified to match reference design without color cycling */
+
+.orb-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  color: white;
+  pointer-events: auto;
+  /* Increased max-width for better content spacing */
+  max-width: 600px;
+  padding: 0 2rem;
+}
+
+.orb-title {
+  /* Reduced font size to accommodate subtitle and description */
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  line-height: 1.1;
+}
+
+/* Added back subtitle styling */
+.orb-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Added back description styling */
+.orb-description {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.orb-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.orb-primary-button {
+  /* Updated to white button with black text like reference */
+  background: white;
+  color: black;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.orb-primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+.orb-secondary-button {
+  /* Updated to dark translucent button like reference */
+  background: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  min-width: 160px;
+}
+
+.orb-secondary-button:hover {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .orb-title {
+    font-size: 2.5rem;
+  }
+
+  /* Added responsive styling for subtitle */
+  .orb-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .orb-content {
+    max-width: 500px;
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .orb-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .orb-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .orb-subtitle {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .orb-description {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .orb-content {
+    max-width: 280px;
+    padding: 0 0.5rem;
+  }
+
+  .orb-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .orb-primary-button,
+  .orb-secondary-button {
+    width: 160px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .orb-title {
+    font-size: 1.5rem;
+  }
+
+  .orb-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .orb-description {
+    font-size: 0.75rem;
+  }
+
+  .orb-content {
+    max-width: 240px;
+    padding: 0 0.25rem;
+  }
+
+  .orb-primary-button,
+  .orb-secondary-button {
+    width: 140px;
+    padding: 0.65rem 0.875rem;
+    font-size: 0.8rem;
+  }
+}

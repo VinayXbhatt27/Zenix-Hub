@@ -1,0 +1,59 @@
+.Messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;           /* ✅ fills Chat vertically */
+  padding: 8px;
+  overflow-y: auto;  /* ✅ scroll happens here only */
+}
+
+
+
+.Group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Group:nth-last-of-type(2) {
+  /* 8px - gap between groups */
+  min-height: calc(100% - 8px);
+}
+
+.Message {
+  width: 90%;
+  padding: 0 16px;
+  border-radius: 16px;
+  font-size: 14px;
+
+  &[data-role="system"] {
+    background: light-dark(#f9dbdb, #6d3030);
+  }
+
+  &[data-role="user"] {
+    align-self: flex-end;
+    background: light-dark(#f3f3f3, #303030);
+  }
+}
+
+.Markdown pre {
+  white-space: pre-wrap;
+}
+
+.Markdown pre:has(code) {
+  padding: 8px;
+  border-radius: 8px;
+  background: light-dark(#f9f9f9, #171717);
+}
+
+.GeneratedImage {
+  display: block;
+  max-width: calc(100% - 32px); /* Leaves space for padding in message bubble */
+  max-height: 70vh; /* Limits image height to fit most of the viewport */
+  height: auto;
+  border-radius: 12px;
+  margin: 8px auto; /* Center image horizontally */
+  object-fit: contain;
+  background-color: #f8f8f8;
+  padding: 4px;
+}
