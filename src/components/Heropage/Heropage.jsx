@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import styles from "./Heropage.module.css"
+import styles from "./HeroPage.module.css"
 import Orb from "./Orb"
 
 // Firebase imports
