@@ -1,26 +1,48 @@
 .App {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  height: 100vh;       /* ✅ lock app to viewport */
+  height: 100vh;
   padding: 16px;
   box-sizing: border-box;
-  overflow: hidden;    /* ✅ prevent background scroll */
+  overflow: hidden;
 }
 
+/* Header spans full width */
 .Header {
-  padding-left: calc(260px + 16px);
-  text-align: center;
-  flex-shrink: 0;      /* ✅ header stays fixed */
+  width: 100%;                /* ✅ full width */
+  position: relative;          /* anchor for absolute UserMenu */
+  display: flex;
+  justify-content: center;     /* logo/title centered */
+  align-items: center;
+  padding: 12px 16px;
+  box-sizing: border-box;
 }
 
+.HeaderCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.Logo {
+  width: 64px;
+  height: 64px;
+}
+
+.Title {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+/* Content Area */
 .Content {
   display: flex;
-  flex: 1;             /* ✅ take all available space */
+  flex: 1;
   gap: 16px;
   width: 100%;
-  overflow: hidden;    /* ✅ no page scroll here */
+  overflow: hidden;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -32,16 +54,7 @@
   gap: 16px;
   max-width: 800px;
   margin: 0 auto;
-  overflow: hidden;    /* ✅ prevents outer scroll, keeps it contained */
-}
-
-.Logo {
-  width: 64px;
-  height: 64px;
-}
-
-.Title {
-  margin: 0;
+  overflow: hidden;
 }
 
 .Configuration {
@@ -51,35 +64,63 @@
   gap: 8px;
   font-size: 14px;
   opacity: 0.8;
-  flex-shrink: 0;     /* ✅ config bar stays at bottom, doesn’t push page */
+  flex-shrink: 0;
 }
 
-.UserInfo {
+/* User dropdown styles */
+.UserMenu {
   position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  top: 12px;
+  right: 16px;                 /* ✅ now works (relative to full-width header) */
 }
 
-.UserProfile {
+.UserBox {
+  background: #f4f4f4;
+  border-radius: 12px;
+  padding: 6px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.UserButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .UserIcon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .UserIconFill {
-  fill: #555; /* ✅ good grey for head */
+  fill: #555;
 }
 
 .UserIconStroke {
-  stroke: #555; /* ✅ good grey for body */
+  stroke: #555;
+}
+
+.DropdownMenu {
+  margin-top: 8px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 140px;
+  right: 0;
+  position: absolute;
+  z-index: 20;
 }
 
 .UserName {
@@ -104,12 +145,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  .Header {
-    padding-left: 0;
-  }
-
   .Content {
     max-width: none;
+    flex-direction: column;
   }
 
   .Main {

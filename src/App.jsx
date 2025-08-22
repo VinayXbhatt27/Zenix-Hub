@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
 import styles from "./App.module.css";
 import { Assistants } from "./components/Assistants/Assistants.jsx";
@@ -16,6 +16,8 @@ function App() {
   const [chats, setChats] = useState([]);
   const [activeChatId, setActiveChatId] = useState();
   const [user, setUser] = useState(null); // Firebase user
+  const [menuOpen, setMenuOpen] = useState(false); // dropdown toggle
+  const menuRef = useRef(null);
 
   const activeChatMessages = useMemo(
     () => chats.find(({ id }) => id === activeChatId)?.messages ?? [],
@@ -33,7 +35,16 @@ function App() {
     return () => unsubscribe();
   }, [chats.length]);
 
-  // Removed getRedirectResult useEffect as it causes conflicts on mobile
+  // Close dropdown if clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Assistant selection
   function handleAssistantChange(newAssistant) {
@@ -63,7 +74,7 @@ function App() {
     setActiveChatId(id);
   }
 
-  // Handle logout with proper cleanup
+  // Handle logout
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -75,40 +86,53 @@ function App() {
     }
   };
 
-  // If user not logged in → show HeroPage
   if (!user) {
     return <HeroPage />;
   }
 
-  // If logged in → show chat app
   return (
     <div className={styles.App}>
       <header className={styles.Header}>
-        <img className={styles.Logo} src="/chat-bot.png" alt="logo" />
-        <h2 className={styles.Title}>ZENIX HUB</h2>
+        {/* Centered logo + title */}
+        <div className={styles.HeaderCenter}>
+          <img className={styles.Logo} src="/chat-bot.png" alt="logo" />
+          <h2 className={styles.Title}>ZENIX HUB</h2>
+        </div>
 
-        {/* User Info */}
-        <div className={styles.UserInfo}>
-          <div className={styles.UserProfile}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              className={styles.UserIcon}
+        {/* User Dropdown top-right */}
+        <div className={styles.UserMenu} ref={menuRef}>
+          <div className={styles.UserBox}>
+            <button
+              className={styles.UserButton}
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-haspopup="true"
+              aria-expanded={menuOpen}
             >
-              <circle cx="12" cy="8" r="4" className={styles.UserIconFill} />
-              <path
-                d="M4 20c0-4 4-6 8-6s8 2 8 6"
-                fill="none"
-                strokeWidth="2"
-                strokeLinecap="round"
-                className={styles.UserIconStroke}
-              />
-            </svg>
-            <span className={styles.UserName}>{user.displayName || "User"}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                className={styles.UserIcon}
+              >
+                <circle cx="12" cy="8" r="4" className={styles.UserIconFill} />
+                <path
+                  d="M4 20c0-4 4-6 8-6s8 2 8 6"
+                  fill="none"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  className={styles.UserIconStroke}
+                />
+              </svg>
+            </button>
           </div>
-          <button className={styles.LogoutButton} onClick={handleLogout}>
-            Logout
-          </button>
+
+          {menuOpen && (
+            <div className={styles.DropdownMenu}>
+              <span className={styles.UserName}>{user.displayName || "User"}</span>
+              <button className={styles.LogoutButton} onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </header>
 
